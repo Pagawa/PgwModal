@@ -12,17 +12,17 @@
         var pgwModal = {};	
         var defaults = {
             close: true,
-            width: 500,
+            maxWidth: 500,
             loading: 'Loading in progress...',
             error: 'An error has occured. Please try again in a few moments.'
         };
-        
+
         if (typeof window.pgwModalObject != 'undefined') {
             pgwModal = window.pgwModalObject;
         }
 
         // Merge the defaults and the user's config
-        if (typeof obj == 'object') {
+        if ((typeof obj == 'object') && (! obj.pushContent)) {
             if (! obj.url && ! obj.target && ! obj.content) {
                 throw new Error('PgwModal - There is no content to display, please provide a config parameter : "url", "target" or "content"');
             }
@@ -34,23 +34,17 @@
 
         // Create modal container
         var create = function() {
-            if ($('#pgwModal').length == 0) {
-                var appendBody = '<div id="pgwModalWrapper"></div>'
-                    + '<div id="pgwModal">'
-                    + '<div class="pmContainer">'
-                    + '<div class="pmBody">';
-                
-                if (pgwModal.config.close) {
-                    var appendBody = appendBody + '<a href="javascript:void(0)" class="pmClose" onclick="$.pgwModal(\'close\')"><span class="sprite flf"></span></a>';
-                }
-
-                var appendBody = appendBody + '<div class="pmTitle"></div>'
-                    + '<div class="pmContent cntr"></div>'
-                    + '</div>'
-                    + '</div>'
-                    + '</div>';
-                $('body').append(appendBody);
-            }
+            var appendBody = '<div id="pgwModalWrapper"></div>'
+                + '<div id="pgwModal">'
+                + '<div class="pmContainer">'
+                + '<div class="pmBody">'
+                + '<a href="javascript:void(0)" class="pmClose" onclick="$.pgwModal(\'close\')"><span></span></a>'
+                + '<div class="pmTitle"></div>'
+                + '<div class="pmContent cntr"></div>'
+                + '</div>'
+                + '</div>'
+                + '</div>';
+            $('body').append(appendBody);
             return true;
         };
 
@@ -69,7 +63,7 @@
             });
             return true;
         };
-        
+
         // Push content into the modal
         var pushContent = function(content) {
             $('#pgwModal .pmContent').html(content);
@@ -79,7 +73,7 @@
             reposition();
             return true;
         };
-        
+
         // Repositions the modal
         var reposition = function() {
             var windows_height = $(window).height();
@@ -91,19 +85,12 @@
             $('#pgwModal .pmBody').css('margin-top', margin_top);
             return true;
         };
-        
+
         // Returns the modal data
         var getData = function() {
             return pgwModal.config.modalData;
         };
-        
-        // Update the modal object
-        var updateObject = function(key, value) {
-            pgwModal[key] = value;
-            window.pgwModalObject = pgwModal;
-            return true;
-        };
-        
+
         // Close the modal
         var close = function() {
             $('#pgwModal, #pgwModalWrapper').hide();
@@ -115,19 +102,24 @@
 
         // Open the modal
         var open = function() {
-            if (pgwModal.isOpen) {
-                reset();
-            } else {
+            if ($('#pgwModal').length == 0) {
                 create();
-                updateObject('isOpen', true);
+            } else {
+                reset();
+            }
+
+            if (! pgwModal.config.close) {
+               $('#pgwModal .pmClose').hide();
+            } else {
+                $('#pgwModal .pmClose').show();
             }
 
             if (pgwModal.config.title) {
                 $('#pgwModal .pmTitle').text(pgwModal.config.title);
             }
 
-            if (pgwModal.config.width) {
-                $('#pgwModal .pmBody').css('max-width', pgwModal.config.width);
+            if (pgwModal.config.maxWidth) {
+                $('#pgwModal .pmBody').css('max-width', pgwModal.config.maxWidth);
             }
 
             // Content loaded by Ajax
@@ -139,11 +131,7 @@
                 var ajaxOptions = {
                     'url' : obj.url,
                     'success' : function(data) {
-                        if (typeof data.response == 'undefined') {
-                            $('#pgwModal .pmContent').html(pgwModal.config.error);
-                            return false;
-                        }
-                        pushContent(data.response);
+                        pushContent(data);
                     },
                     'error' : function() {
                         $('#pgwModal .pmContent').html(pgwModal.config.error);
@@ -173,10 +161,16 @@
         // Choose the action
         if ((typeof obj == 'string') && (obj == 'close')) {
             return close();
+
         } else if ((typeof obj == 'string') && (obj == 'reposition')) {
             return reposition();
+
         } else if ((typeof obj == 'string') && (obj == 'getData')) {
             return getData();
+
+        } else if ((typeof obj == 'object') && (obj.pushContent)) {
+            return pushContent(obj.pushContent);
+
         } else if (typeof obj == 'object') {
             return open();
         }

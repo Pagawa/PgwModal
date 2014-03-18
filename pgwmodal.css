@@ -80,8 +80,9 @@ body.pgwModal {
     padding: 5px;
 }
 
-#pgwModal .pmClose .sprite {
+#pgwModal .pmClose span {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAOhJREFUOE91kttOwkAURXm0JlLUvyeREBJ8M8E7KHiJGr8Kx7XqGWmnsJOVM909u6edziCldAxzuIURDErpwRk8wgQqjUv4CR6ghoh0QmuwZwsXmjZrKOs9NJMDQ8/Q7ll4w6ZlGMrqw/Tbk5T1Dur81FMow+/wFWv1H4LOd5ST29K7gSH8hbI0wMmfUOoF+iGlCefwDaXeoP+rNMDQBg69qv9wF3YBZcj6Ch+xVta8201wXyhvxL7dbiYbfApDtUP5bQz3erwxiwu5hs7uuQbDK7DHIzfWrGAKV3ACEdlJDwx7HMcppaNfPc9lv0agCRMAAAAASUVORK5CYII=);
+    display: block;
     height: 14px;
     width: 14px;
 }
