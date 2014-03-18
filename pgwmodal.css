@@ -1,0 +1,87 @@
+/**
+ * PgwModal - Version 1.0
+ *
+ * Copyright 2014, Jonathan M. Piat
+ * http://pgwjs.com - http://pagawa.com
+ *
+ * Released under the MIT license - http://opensource.org/licenses/MIT
+ */
+body.pgwModal {
+    overflow: hidden;
+}
+
+#pgwModalWrapper {
+    background: #000;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+}
+
+#pgwModal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index : 9010;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+#pgwModal .pmContainer {
+    text-align: center;
+    z-index: 9020;
+}
+
+#pgwModal .pmBody {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0px 5px 3px #555;
+    box-shadow: 0 0px 5px 3px #555;
+    display: inline-block;
+    max-width: 800px;
+    min-width: 300px;
+    position: relative;
+    width: 100%;
+    z-index: 9030;
+}
+
+#pgwModal .pmTitle {
+    background: #e1e1e1;
+    padding: 5px 0 6px;
+    margin: 10px 10px 0;
+    border-bottom: 1px solid #ddd;
+    border-radius: 2px 2px 0 0;
+    font-size: 1rem;
+    min-height: 25px;
+}
+
+#pgwModal .pmContent {
+    background: #fff;
+    padding: 10px;
+    margin: 0 10px 10px;
+    box-shadow: 0 3px 3px -2px #999999 inset;
+    -webkit-box-shadow: 0 3px 3px -2px #999999 inset;
+    border-radius: 0 0 2px 2px;
+}
+
+#pgwModal .pmClose {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #777;
+    border: 1px solid #666;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#pgwModal .pmClose .sprite {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAOhJREFUOE91kttOwkAURXm0JlLUvyeREBJ8M8E7KHiJGr8Kx7XqGWmnsJOVM909u6edziCldAxzuIURDErpwRk8wgQqjUv4CR6ghoh0QmuwZwsXmjZrKOs9NJMDQ8/Q7ll4w6ZlGMrqw/Tbk5T1Dur81FMow+/wFWv1H4LOd5ST29K7gSH8hbI0wMmfUOoF+iGlCefwDaXeoP+rNMDQBg69qv9wF3YBZcj6Ch+xVta8201wXyhvxL7dbiYbfApDtUP5bQz3erwxiwu5hs7uuQbDK7DHIzfWrGAKV3ACEdlJDwx7HMcppaNfPc9lv0agCRMAAAAASUVORK5CYII=);
+    height: 14px;
+    width: 14px;
+}
