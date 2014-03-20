@@ -1,5 +1,5 @@
 /**
- * PgwModal - Version 1.0
+ * PgwModal - Version 1.1
  *
  * Copyright 2014, Jonathan M. Piat
  * http://pgwjs.com - http://pagawa.com
@@ -16,7 +16,7 @@
             loading: 'Loading in progress...',
             error: 'An error has occured. Please try again in a few moments.'
         };
-
+        
         if (typeof window.pgwModalObject != 'undefined') {
             pgwModal = window.pgwModalObject;
         }
@@ -38,7 +38,7 @@
                 + '<div id="pgwModal">'
                 + '<div class="pmContainer">'
                 + '<div class="pmBody">'
-                + '<a href="javascript:void(0)" class="pmClose" onclick="$.pgwModal(\'close\')"><span></span></a>'
+                + '<a href="javascript:void(0)" class="pmClose" onclick="$.pgwModal(\'close\')"></a>'
                 + '<div class="pmTitle"></div>'
                 + '<div class="pmContent cntr"></div>'
                 + '</div>'
@@ -63,7 +63,7 @@
             });
             return true;
         };
-
+        
         // Push content into the modal
         var pushContent = function(content) {
             $('#pgwModal .pmContent').html(content);
@@ -73,7 +73,7 @@
             reposition();
             return true;
         };
-
+        
         // Repositions the modal
         var reposition = function() {
             var windows_height = $(window).height();
@@ -85,7 +85,7 @@
             $('#pgwModal .pmBody').css('margin-top', margin_top);
             return true;
         };
-
+        
         // Returns the modal data
         var getData = function() {
             return pgwModal.config.modalData;
@@ -109,10 +109,10 @@
             }
 
             if (! pgwModal.config.close) {
-               $('#pgwModal .pmClose').hide();
-            } else {
-                $('#pgwModal .pmClose').show();
-            }
+                                $('#pgwModal .pmClose').hide();
+                        } else {
+                                $('#pgwModal .pmClose').show();
+                        }
 
             if (pgwModal.config.title) {
                 $('#pgwModal .pmTitle').text(pgwModal.config.title);
