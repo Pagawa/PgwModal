@@ -109,10 +109,10 @@
             }
 
             if (! pgwModal.config.close) {
-                                $('#pgwModal .pmClose').hide();
-                        } else {
-                                $('#pgwModal .pmClose').show();
-                        }
+                $('#pgwModal .pmClose').hide();
+            } else {
+                $('#pgwModal .pmClose').show();
+            }
 
             if (pgwModal.config.title) {
                 $('#pgwModal .pmTitle').text(pgwModal.config.title);
