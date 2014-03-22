@@ -36,11 +36,11 @@
         var create = function() {
             var appendBody = '<div id="pgwModalWrapper"></div>'
                 + '<div id="pgwModal">'
-                + '<div class="pmContainer">'
-                + '<div class="pmBody">'
-                + '<a href="javascript:void(0)" class="pmClose" onclick="$.pgwModal(\'close\')"></a>'
-                + '<div class="pmTitle"></div>'
-                + '<div class="pmContent cntr"></div>'
+                + '<div class="pm-container">'
+                + '<div class="pm-body">'
+                + '<a href="javascript:void(0)" class="pm-close" onclick="$.pgwModal(\'close\')"></a>'
+                + '<div class="pm-title"></div>'
+                + '<div class="pm-content cntr"></div>'
                 + '</div>'
                 + '</div>'
                 + '</div>';
@@ -50,15 +50,15 @@
 
         // Reset modal container
         var reset = function() {
-            $('#pgwModal .pmTitle, #pgwModal .pmContent').html('');
+            $('#pgwModal .pm-title, #pgwModal .pm-content').html('');
             return true;
         };
 
         // Angular compilation
         var angularCompilation = function() {
             angular.element('body').injector().invoke(function($compile) {
-                var scope = angular.element($('#pgwModal .pmContent')).scope();
-                $compile($('#pgwModal .pmContent'))(scope);
+                var scope = angular.element($('#pgwModal .pm-content')).scope();
+                $compile($('#pgwModal .pm-content'))(scope);
                 scope.$digest();
             });
             return true;
@@ -66,7 +66,7 @@
         
         // Push content into the modal
         var pushContent = function(content) {
-            $('#pgwModal .pmContent').html(content);
+            $('#pgwModal .pm-content').html(content);
             if (pgwModal.config.angular) {
                 angularCompilation();
             }
@@ -77,12 +77,12 @@
         // Repositions the modal
         var reposition = function() {
             var windows_height = $(window).height();
-            var modal_height = $('#pgwModal .pmBody').height();
+            var modal_height = $('#pgwModal .pm-body').height();
             var margin_top = Math.round((windows_height - modal_height)/3);
             if (margin_top <= 0) {
                 margin_top = 10;
             }
-            $('#pgwModal .pmBody').css('margin-top', margin_top);
+            $('#pgwModal .pm-body').css('margin-top', margin_top);
             return true;
         };
         
@@ -109,23 +109,23 @@
             }
 
             if (! pgwModal.config.close) {
-                $('#pgwModal .pmClose').hide();
+                $('#pgwModal .pm-close').hide();
             } else {
-                $('#pgwModal .pmClose').show();
+                $('#pgwModal .pm-close').show();
             }
 
             if (pgwModal.config.title) {
-                $('#pgwModal .pmTitle').text(pgwModal.config.title);
+                $('#pgwModal .pm-title').text(pgwModal.config.title);
             }
 
             if (pgwModal.config.maxWidth) {
-                $('#pgwModal .pmBody').css('max-width', pgwModal.config.maxWidth);
+                $('#pgwModal .pm-body').css('max-width', pgwModal.config.maxWidth);
             }
 
             // Content loaded by Ajax
             if (pgwModal.config.url) {
                 if (pgwModal.config.loading) {
-                    $('#pgwModal .pmContent').html(pgwModal.config.loading);
+                    $('#pgwModal .pm-content').html(pgwModal.config.loading);
                 }
 
                 var ajaxOptions = {
@@ -134,7 +134,7 @@
                         pushContent(data);
                     },
                     'error' : function() {
-                        $('#pgwModal .pmContent').html(pgwModal.config.error);
+                        $('#pgwModal .pm-content').html(pgwModal.config.error);
                     }
                 };
 

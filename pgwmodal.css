@@ -33,12 +33,12 @@ body.pgwModal {
     overflow-y: scroll;
 }
 
-#pgwModal .pmContainer {
+#pgwModal .pm-container {
     text-align: center;
     z-index: 9020;
 }
 
-#pgwModal .pmBody {
+#pgwModal .pm-body {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     -webkit-box-shadow: 0 0px 5px 3px #555;
@@ -51,7 +51,7 @@ body.pgwModal {
     z-index: 9030;
 }
 
-#pgwModal .pmTitle {
+#pgwModal .pm-title {
     background: #e5e5e5;
     padding: 5px 0 6px;
     border-bottom: 1px solid #d5d5d5;
@@ -60,14 +60,14 @@ body.pgwModal {
     min-height: 25px;
 }
 
-#pgwModal .pmContent {
+#pgwModal .pm-content {
     background: #fff;
     padding: 10px;
     border-radius: 0 0 5px 5px;
     text-align: left;
 }
 
-#pgwModal .pmClose {
+#pgwModal .pm-close {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwQAADsEBuJFr7QAAABp0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuMTFH80I3AAABIklEQVQ4T62T20oDQRBE+9EIGo1/H4gEQd8E74lJvKHiV+mmai7QNdu+ZFNwWKqmpzJhdq3rur0ShkMIwyGoMTsEl+AenDDw62WGmoAFOAcjWRdjdgX+Ck9gDPw6xbIN4MwvmEmHmFzCQRo+H0E6aRHL1sDP3EiHmLx5WQbrBv4Ic3+yuvYAxtIhJusUtKUf4LvJUhnQDm9SkNWe1MPsDhyD/v42SGEWT/oFfBl5BWFZ2huGWWfgB/gy8g7CVyrt7QVZLHsB//1lvoNhqZqstozPN/DZZPX2tUNMXFYvILr9dFLpEGO2KoNtWRVLezPSIcbsogyRWyC3WcTSZ8AZfnpT6RCDDx3MwTU4YuDXywzFUn6WU3Ag697sgzAcQhjuTmdbpLYNJt1Fr50AAAAASUVORK5CYII=);
     display: block;
     height: 20px;
