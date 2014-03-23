@@ -3,8 +3,12 @@
     "title": "PgwModal",
     "description": "Responsive modal / dialog window for jQuery",
     "keywords": [
-        "cookie",
-        "cookies"
+        "modal",
+        "dialog",
+        "window",
+        "popup",
+        "alert",
+        "responsive"
     ],
     "version": "1.1.0",
     "author": {
