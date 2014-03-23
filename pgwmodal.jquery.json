@@ -1,0 +1,31 @@
+{
+    "name": "pgwmodal",
+    "title": "PgwModal",
+    "description": "Responsive modal / dialog window for jQuery",
+    "keywords": [
+        "cookie",
+        "cookies"
+    ],
+    "version": "1.1.0",
+    "author": {
+        "name": "Jonathan M. Piat"
+    },
+    "maintainers": [
+        {
+            "name": "Jonathan M. Piat"
+        }
+    ],
+    "licenses": [
+        {
+        "type": "MIT",
+        "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/Pagawa/PgwModal/issues",
+    "homepage": "http://pgwjs.com/pgwmodal",
+    "docs": "http://pgwjs.com/pgwmodal",
+    "download": "http://pgwjs.com/pgwmodal",
+    "dependencies": {
+        "jquery": ">=1"
+    }
+}
