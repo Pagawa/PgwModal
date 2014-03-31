@@ -1,7 +1,14 @@
 PgwModal
 ========
 
-An example and the full API documentation are available at [PgwJS.com](http://pgwjs.com/pgwmodal/).
+The full documentation and an example are available on [PgwJS.com](http://pgwjs.com/pgwmodal/).
+
+
+Requirements
+---------
+
+jQuery 1.0 (minimal version)
+
 
 Changelog
 ---------
