@@ -10,7 +10,13 @@ Requirements
 jQuery 1.0 or Zepto.js 1.0 (minimal version)
 
 
+All any issues or pull requests must be submitted through GitHub.
+
+* To report an issue or a feature request, please use [GitHub Issues](https://github.com/Pagawa/PgwModal/issues).
+* To make a pull request, please create a new branch for each feature or issue.
+
+
 Changelog
 ---------
 
-2014-03-20 - Update of default modal style (Version 1.1)
+* 2014-03-20 - Update of default modal style (Version 1.1)
