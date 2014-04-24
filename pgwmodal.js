@@ -1,10 +1,10 @@
 /**
- * PgwModal - Version 1.1
+ * PgwModal - Version 1.2
  *
  * Copyright 2014, Jonathan M. Piat
  * http://pgwjs.com - http://pagawa.com
  * 
- * Released under the MIT license - http://opensource.org/licenses/MIT
+ * Released under the GNU GPLv3 license - http://opensource.org/licenses/gpl-3.0
  */
 ;(function($){
     $.pgwModal = function(obj) {
@@ -90,6 +90,11 @@
         var getData = function() {
             return pgwModal.config.modalData;
         };
+        
+        // Returns the modal status
+        var isOpen = function() {
+            return $('body').hasClass('pgwModal');
+        };
 
         // Close the modal
         var close = function() {
@@ -167,6 +172,9 @@
 
         } else if ((typeof obj == 'string') && (obj == 'getData')) {
             return getData();
+            
+        } else if ((typeof obj == 'string') && (obj == 'isOpen')) {
+            return isOpen();
 
         } else if ((typeof obj == 'object') && (obj.pushContent)) {
             return pushContent(obj.pushContent);
