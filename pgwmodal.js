@@ -45,6 +45,7 @@
                 + '</div>'
                 + '</div>';
             $('body').append(appendBody);
+            $(document).trigger('PgwModal::Create');
             return true;
         };
 
@@ -71,6 +72,7 @@
                 angularCompilation();
             }
             reposition();
+            $(document).trigger('PgwModal::PushContent');
             return true;
         };
         
@@ -101,11 +103,12 @@
             $('#pgwModal, #pgwModalWrapper').hide();
             $('body').removeClass('pgwModal');
             reset();
-            try { 
+            try {
                 delete window.pgwModalObject; 
             } catch(e) {
                 window['pgwModalObject'] = undefined; 
             }
+            $(document).trigger('PgwModal::Close');
             return true;
         };
 
@@ -163,7 +166,8 @@
             }
 
             $('#pgwModal, #pgwModalWrapper').show();
-            $('body').addClass('pgwModal');			
+            $('body').addClass('pgwModal');
+            $(document).trigger('PgwModal::Open');
             return true;
         };
 

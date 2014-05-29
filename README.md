@@ -22,6 +22,7 @@ All any issues or pull requests must be submitted through GitHub.
 ChangeLog
 ---------
 
+* 2014-05-30 - Added 4 modal events.  View details on [PgwJS.com](http://pgwjs.com/pgwmodal/) (Version 1.3)
 * 2014-05-29 - IE8 bug fix : Delete window object / YUI compressor fix : Angular compilation
 * 2014-04-24 - Added the "isOpen" function (Version 1.2)
 * 2014-03-20 - Update of default modal style (Version 1.1)
