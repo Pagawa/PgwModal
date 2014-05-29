@@ -101,7 +101,11 @@
             $('#pgwModal, #pgwModalWrapper').hide();
             $('body').removeClass('pgwModal');
             reset();
-            delete window.pgwModalObject;
+            try { 
+                delete window.pgwModalObject; 
+            } catch(e) {
+                window['pgwModalObject'] = undefined; 
+            }
             return true;
         };
 
