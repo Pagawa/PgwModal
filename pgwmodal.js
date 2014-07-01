@@ -1,5 +1,5 @@
 /**
- * PgwModal - Version 1.3
+ * PgwModal - Version 1.4
  *
  * Copyright 2014, Jonathan M. Piat
  * http://pgwjs.com - http://pagawa.com
@@ -191,4 +191,4 @@
             return open();
         }
     }
-})(jQuery);
+})(window.Zepto || window.jQuery);
