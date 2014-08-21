@@ -22,6 +22,7 @@ All issues or pull requests must be submitted through GitHub.
 ChangeLog
 ---------
 
+* 2014-08-21 - Fix for reposition function by Hummerpj (Version 1.5)
 * 2014-07-02 - Fix for Zepto (Version 1.4)
 * 2014-05-30 - Added 4 modal events.  View details on [PgwJS.com](http://pgwjs.com/pgwmodal/) (Version 1.3)
 * 2014-05-29 - IE8 bug fix : Delete window object / YUI compressor fix : Angular compilation (Version 1.2.2)
