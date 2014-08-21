@@ -78,6 +78,9 @@
         
         // Repositions the modal
         var reposition = function() {
+            // elements must be visible before height calculation
+            $('#pgwModal, #pgwModalWrapper').show();
+        
             var windows_height = $(window).height();
             var modal_height = $('#pgwModal .pm-body').height();
             var margin_top = Math.round((windows_height - modal_height)/3);
@@ -165,7 +168,6 @@
                 pushContent(pgwModal.config.content);
             }
 
-            $('#pgwModal, #pgwModalWrapper').show();
             $('body').addClass('pgwModal');
             $(document).trigger('PgwModal::Open');
             return true;
