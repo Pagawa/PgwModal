@@ -3,20 +3,20 @@
  *
  * Copyright 2014, Jonathan M. Piat
  * http://pgwjs.com - http://pagawa.com
- * 
+ *
  * Released under the GNU GPLv3 license - http://opensource.org/licenses/gpl-3.0
  */
 ;(function($){
     $.pgwModal = function(obj) {
 
-        var pgwModal = {};	
+        var pgwModal = {};
         var defaults = {
             close: true,
             maxWidth: 500,
             loading: 'Loading in progress...',
             error: 'An error has occured. Please try again in a few moments.'
         };
-        
+
         if (typeof window.pgwModalObject != 'undefined') {
             pgwModal = window.pgwModalObject;
         }
@@ -38,9 +38,11 @@
                 + '<div id="pgwModal">'
                 + '<div class="pm-container">'
                 + '<div class="pm-body">'
-                + '<a href="javascript:void(0)" class="pm-close" onclick="$.pgwModal(\'close\')"></a>'
-                + '<div class="pm-title"></div>'
-                + '<div class="pm-content cntr"></div>'
+                + '<a href="javascript:void(0)" class="pm-close" onclick="$.pgwModal(\'close\')"></a>';
+            if (pgwModal.config.title) {
+                appendBody += '<div class="pm-title"></div>';
+            }
+                appendBody += '<div class="pm-content cntr"></div>'
                 + '</div>'
                 + '</div>'
                 + '</div>';
@@ -64,7 +66,7 @@
             });
             return true;
         };
-        
+
         // Push content into the modal
         var pushContent = function(content) {
             $('#pgwModal .pm-content').html(content);
@@ -75,12 +77,12 @@
             $(document).trigger('PgwModal::PushContent');
             return true;
         };
-        
+
         // Repositions the modal
         var reposition = function() {
             // elements must be visible before height calculation
             $('#pgwModal, #pgwModalWrapper').show();
-        
+
             var windows_height = $(window).height();
             var modal_height = $('#pgwModal .pm-body').height();
             var margin_top = Math.round((windows_height - modal_height)/3);
@@ -90,12 +92,12 @@
             $('#pgwModal .pm-body').css('margin-top', margin_top);
             return true;
         };
-        
+
         // Returns the modal data
         var getData = function() {
             return pgwModal.config.modalData;
         };
-        
+
         // Returns the modal status
         var isOpen = function() {
             return $('body').hasClass('pgwModal');
@@ -107,9 +109,9 @@
             $('body').removeClass('pgwModal');
             reset();
             try {
-                delete window.pgwModalObject; 
+                delete window.pgwModalObject;
             } catch(e) {
-                window['pgwModalObject'] = undefined; 
+                window['pgwModalObject'] = undefined;
             }
             $(document).trigger('PgwModal::Close');
             return true;
@@ -158,7 +160,7 @@
                 }
 
                 $.ajax(ajaxOptions);
-                
+
             // Content loaded by a html element
             } else if (pgwModal.config.target) {
                 pushContent($(pgwModal.config.target).html());
@@ -182,7 +184,7 @@
 
         } else if ((typeof obj == 'string') && (obj == 'getData')) {
             return getData();
-            
+
         } else if ((typeof obj == 'string') && (obj == 'isOpen')) {
             return isOpen();
 
