@@ -12,6 +12,7 @@
         var pgwModal = {};
         var defaults = {
             close: true,
+            closeText: 'Close',
             maxWidth: 500,
             loading: 'Loading in progress...',
             error: 'An error has occured. Please try again in a few moments.'
@@ -37,8 +38,10 @@
             var appendBody = '<div id="pgwModalWrapper"></div>'
                 + '<div id="pgwModal">'
                 + '<div class="pm-container">'
-                + '<div class="pm-body">'
-                + '<a href="javascript:void(0)" class="pm-close" onclick="$.pgwModal(\'close\')"></a>';
+                + '<div class="pm-body">';
+            if (pgwModal.config.close) {
+                appendBody += '<span class="pm-close">'+pgwModal.config.closeText+'</span>';
+            }
             if (pgwModal.config.title) {
                 appendBody += '<div class="pm-title"></div>';
             }
@@ -47,6 +50,11 @@
                 + '</div>'
                 + '</div>';
             $('body').append(appendBody);
+            if (pgwModal.config.close) {
+                $('.pm-close').on('click', function() {
+                    $.pgwModal('close');
+                });
+            }
             $(document).trigger('PgwModal::Create');
             return true;
         };
@@ -123,12 +131,6 @@
                 create();
             } else {
                 reset();
-            }
-
-            if (! pgwModal.config.close) {
-                $('#pgwModal .pm-close').hide();
-            } else {
-                $('#pgwModal .pm-close').show();
             }
 
             if (pgwModal.config.title) {
