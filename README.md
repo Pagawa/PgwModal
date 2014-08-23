@@ -28,6 +28,7 @@ ChangeLog
         - The title bar can be totally removed.
         - 3 new closing functionalities: "Close on escape", "Close on background click" and customization of the image/link (Defaults to the current black cross).
         - This version prevents the gap on the background content at the opening of the modal.
+        - **WARNING** Several parameters have been renamed: "close" option becomes "closable", "loading" option becomes "loadingContent", and "error" option becomes "errorContent".
 
 * Version 1 (deprecated)
     * 2014-08-21 - Fix for reposition function by Hummerpj (Version 1.5)
