@@ -31,6 +31,10 @@ body.pgwModalOpen {
     z-index: 9010;
 }
 
+#pgwModal .pm-container {
+    margin: 10px;
+}
+
 #pgwModal .pm-body {
     display: inline-block;
     max-width: 800px;
@@ -38,6 +42,7 @@ body.pgwModalOpen {
     position: relative;
     width: 100%;
     z-index: 9020;
+    margin-top: 10px;
 }
 
 /**
@@ -58,7 +63,6 @@ body.pgwModalOpen {
     border-radius: 5px;
     -webkit-box-shadow: 0 0px 5px 5px #555;
     box-shadow: 0 0px 5px 5px #555;
-    margin-top: 10px;
 }
 
 .pgwModal .pm-title {

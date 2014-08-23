@@ -41,10 +41,12 @@
         var create = function() {
             var appendBody = '<div id="pgwModal">'
                 + '<div class="pm-backdrop"></div>'
+                + '<div class="pm-container">'
                 + '<div class="pm-body">'
                 + '<span class="pm-close"></span>'
                 + '<div class="pm-title"></div>'
                 + '<div class="pm-content"></div>'
+                + '</div>'
                 + '</div>'
                 + '</div>';
 
@@ -94,7 +96,7 @@
             var modalHeight = $('#pgwModal .pm-body').height();
             var marginTop = Math.round((windowHeight - modalHeight) / 3);
             if (marginTop <= 0) {
-                marginTop = 10;
+                marginTop = 0;
             }
 
             $('#pgwModal .pm-body').css('margin-top', marginTop);
@@ -105,17 +107,17 @@
         var getData = function() {
             return pgwModal.config.modalData;
         };
-        
+
         // Returns the scrollbar width
         var getScrollbarWidth = function() {
             var container = $('<div style="width:50px;height:50px;overflow:auto"><div></div></div>').appendTo('body');
             var child = container.children();
-            
+
             // Check for Zepto
             if (typeof child.innerWidth != 'function') {
                 return 0;
             }
-            
+
             var width = child.innerWidth() - child.height(90).innerWidth();
             container.remove();
 
@@ -132,7 +134,11 @@
             $('#pgwModal').removeClass().hide();
             $('body').css('padding-right', '').removeClass('pgwModalOpen');
 
+            // Reset modal
             reset();
+
+            // Disable events
+            $(window).unbind('resize.PgwModal');
             $(document).unbind('keyup.PgwModal');
             $('#pgwModal').unbind('click.PgwModalBackdrop');
 
@@ -238,7 +244,12 @@
             if (currentScrollbarWidth > 0) {
                 $('body').css('padding-right', currentScrollbarWidth);
             }
-            
+
+            // Resize event for reposition
+            $(window).bind('resize.PgwModal', function() {
+                reposition();
+            });
+
             $(document).trigger('PgwModal::Open');
             return true;
         };

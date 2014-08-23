@@ -24,8 +24,9 @@ ChangeLog
 
 * Version 2 (newest)
     * 2014-08-23 - The version 2.0 has been released, it brings improvements and new functionalities:
-        - Refactoring of the HTML container of the modal.
+        - Refactoring HTML and CSS.
         - The title bar can be totally removed.
+        - Automatic repositioning after resizing or orientation change.
         - 3 new closing functionalities: "Close on escape" (enabled by default), "Close on background click" (enabled by default), and customization of the image/link (Defaults to the current black cross).
         - This version prevents the gap on the background content at the opening of the modal.
         - **WARNING** Several parameters have been renamed: "close" option becomes "closable", "loading" option becomes "loadingContent", and "error" option becomes "errorContent".
