@@ -12,6 +12,7 @@
         var pgwModal = {};
         var defaults = {
             mainClassName : 'pgwModal',
+            backdropClassName : 'pgwModalBackdrop',
             maxWidth : 500,
             titleBar : true,
             closable : true,
@@ -39,8 +40,9 @@
 
         // Create modal container
         var create = function() {
-            var appendBody = '<div id="pgwModal">'
-                + '<div class="pm-backdrop"></div>'
+            // The backdrop must be outside the main container, otherwise Chrome displays the scrollbar of the modal below
+            var appendBody = '<div id="pgwModalBackdrop"></div>'
+                + '<div id="pgwModal">'
                 + '<div class="pm-container">'
                 + '<div class="pm-body">'
                 + '<span class="pm-close"></span>'
@@ -90,7 +92,7 @@
         // Repositions the modal
         var reposition = function() {
             // Elements must be visible before height calculation
-            $('#pgwModal').show();
+            $('#pgwModal, #pgwModalBackdrop').show();
 
             var windowHeight = $(window).height();
             var modalHeight = $('#pgwModal .pm-body').height();
@@ -132,6 +134,7 @@
         // Close the modal
         var close = function() {
             $('#pgwModal').removeClass().hide();
+            $('#pgwModalBackdrop').removeClass().hide();
             $('body').css('padding-right', '').removeClass('pgwModalOpen');
 
             // Reset modal
@@ -160,8 +163,9 @@
                 reset();
             }
 
-            // Set the main CSS class
+            // Set CSS classes
             $('#pgwModal').removeClass().addClass(pgwModal.config.mainClassName);
+            $('#pgwModalBackdrop').removeClass().addClass(pgwModal.config.backdropClassName);
 
             // Close button
             if (! pgwModal.config.closable) {
@@ -230,8 +234,9 @@
             // Close on background click
             if (pgwModal.config.closeOnBackgroundClick && pgwModal.config.closable) {
                 $('#pgwModal').bind('click.PgwModalBackdrop', function(e) {
-                    var targetBackdrop = $(e.target).hasClass('pm-backdrop');
-                    if (targetBackdrop) {
+                    var targetClass = $(e.target).hasClass('pm-container');
+                    var targetId = $(e.target).attr('id');
+                    if (targetClass || targetId == 'pgwModal') {
                         close();
                     }
                 });
@@ -263,7 +268,7 @@
 
         } else if ((typeof obj == 'string') && (obj == 'getData')) {
             return getData();
-            
+
         } else if ((typeof obj == 'string') && (obj == 'isOpen')) {
             return isOpen();
 
