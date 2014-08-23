@@ -133,8 +133,7 @@
 
         // Close the modal
         var close = function() {
-            $('#pgwModal').removeClass().hide();
-            $('#pgwModalBackdrop').removeClass().hide();
+            $('#pgwModal, #pgwModalBackdrop').removeClass().hide();
             $('body').css('padding-right', '').removeClass('pgwModalOpen');
 
             // Reset modal
