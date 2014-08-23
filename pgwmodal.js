@@ -1,5 +1,5 @@
 /**
- * PgwModal - Version 1.5
+ * PgwModal - Version 2.0
  *
  * Copyright 2014, Jonathan M. Piat
  * http://pgwjs.com - http://pagawa.com
@@ -9,14 +9,19 @@
 ;(function($){
     $.pgwModal = function(obj) {
 
-        var pgwModal = {};	
+        var pgwModal = {};
         var defaults = {
-            close: true,
-            maxWidth: 500,
-            loading: 'Loading in progress...',
-            error: 'An error has occured. Please try again in a few moments.'
+            mainClassName : 'pgwModal',
+            maxWidth : 500,
+            titleBar : true,
+            closable : true,
+            closeOnEscape : true,
+            closeOnBackgroundClick : true,
+            closeContent : '<span class="pm-icon"></span>',
+            loadingContent : 'Loading in progress...',
+            errorContent : 'An error has occured. Please try again in a few moments.'
         };
-        
+
         if (typeof window.pgwModalObject != 'undefined') {
             pgwModal = window.pgwModalObject;
         }
@@ -34,16 +39,15 @@
 
         // Create modal container
         var create = function() {
-            var appendBody = '<div id="pgwModalWrapper"></div>'
-                + '<div id="pgwModal">'
-                + '<div class="pm-container">'
+            var appendBody = '<div id="pgwModal">'
+                + '<div class="pm-backdrop"></div>'
                 + '<div class="pm-body">'
-                + '<a href="javascript:void(0)" class="pm-close" onclick="$.pgwModal(\'close\')"></a>'
+                + '<span class="pm-close"></span>'
                 + '<div class="pm-title"></div>'
-                + '<div class="pm-content cntr"></div>'
-                + '</div>'
+                + '<div class="pm-content"></div>'
                 + '</div>'
                 + '</div>';
+
             $('body').append(appendBody);
             $(document).trigger('PgwModal::Create');
             return true;
@@ -52,6 +56,7 @@
         // Reset modal container
         var reset = function() {
             $('#pgwModal .pm-title, #pgwModal .pm-content').html('');
+            $('#pgwModal .pm-close').html('').unbind('click');
             return true;
         };
 
@@ -64,53 +69,79 @@
             });
             return true;
         };
-        
+
         // Push content into the modal
         var pushContent = function(content) {
             $('#pgwModal .pm-content').html(content);
+
+            // Angular
             if (pgwModal.config.angular) {
                 angularCompilation();
             }
+
             reposition();
+
             $(document).trigger('PgwModal::PushContent');
             return true;
         };
-        
+
         // Repositions the modal
         var reposition = function() {
-            // elements must be visible before height calculation
-            $('#pgwModal, #pgwModalWrapper').show();
-        
-            var windows_height = $(window).height();
-            var modal_height = $('#pgwModal .pm-body').height();
-            var margin_top = Math.round((windows_height - modal_height)/3);
-            if (margin_top <= 0) {
-                margin_top = 10;
+            // Elements must be visible before height calculation
+            $('#pgwModal').show();
+
+            var windowHeight = $(window).height();
+            var modalHeight = $('#pgwModal .pm-body').height();
+            var marginTop = Math.round((windowHeight - modalHeight) / 3);
+            if (marginTop <= 0) {
+                marginTop = 10;
             }
-            $('#pgwModal .pm-body').css('margin-top', margin_top);
+
+            $('#pgwModal .pm-body').css('margin-top', marginTop);
             return true;
         };
-        
+
         // Returns the modal data
         var getData = function() {
             return pgwModal.config.modalData;
         };
         
+        // Returns the scrollbar width
+        var getScrollbarWidth = function() {
+            var container = $('<div style="width:50px;height:50px;overflow:auto"><div></div></div>').appendTo('body');
+            var child = container.children();
+            
+            // Check for Zepto
+            if (typeof child.innerWidth != 'function') {
+                return 0;
+            }
+            
+            var width = child.innerWidth() - child.height(90).innerWidth();
+            container.remove();
+
+            return width;
+        };
+
         // Returns the modal status
         var isOpen = function() {
-            return $('body').hasClass('pgwModal');
+            return $('body').hasClass('pgwModalOpen');
         };
 
         // Close the modal
         var close = function() {
-            $('#pgwModal, #pgwModalWrapper').hide();
-            $('body').removeClass('pgwModal');
+            $('#pgwModal').removeClass().hide();
+            $('body').css('padding-right', '').removeClass('pgwModalOpen');
+
             reset();
+            $(document).unbind('keyup.PgwModal');
+            $('#pgwModal').unbind('click.PgwModalBackdrop');
+
             try {
                 delete window.pgwModalObject; 
             } catch(e) {
                 window['pgwModalObject'] = undefined; 
             }
+
             $(document).trigger('PgwModal::Close');
             return true;
         };
@@ -123,10 +154,23 @@
                 reset();
             }
 
-            if (! pgwModal.config.close) {
-                $('#pgwModal .pm-close').hide();
+            // Set the main CSS class
+            $('#pgwModal').removeClass().addClass(pgwModal.config.mainClassName);
+
+            // Close button
+            if (! pgwModal.config.closable) {
+                $('#pgwModal .pm-close').html('').unbind('click').hide();
             } else {
-                $('#pgwModal .pm-close').show();
+                $('#pgwModal .pm-close').html(pgwModal.config.closeContent).click(function() {
+                    close();
+                }).show();
+            }
+
+            // Title bar
+            if (! pgwModal.config.titleBar) {
+                $('#pgwModal .pm-title').hide();
+            } else {
+                $('#pgwModal .pm-title').show();
             }
 
             if (pgwModal.config.title) {
@@ -139,8 +183,8 @@
 
             // Content loaded by Ajax
             if (pgwModal.config.url) {
-                if (pgwModal.config.loading) {
-                    $('#pgwModal .pm-content').html(pgwModal.config.loading);
+                if (pgwModal.config.loadingContent) {
+                    $('#pgwModal .pm-content').html(pgwModal.config.loadingContent);
                 }
 
                 var ajaxOptions = {
@@ -149,7 +193,7 @@
                         pushContent(data);
                     },
                     'error' : function() {
-                        $('#pgwModal .pm-content').html(pgwModal.config.error);
+                        $('#pgwModal .pm-content').html(pgwModal.config.errorContent);
                     }
                 };
 
@@ -163,12 +207,38 @@
             } else if (pgwModal.config.target) {
                 pushContent($(pgwModal.config.target).html());
 
-            // Content loaded by a html element
+            // Content loaded by a html object
             } else if (pgwModal.config.content) {
                 pushContent(pgwModal.config.content);
             }
 
-            $('body').addClass('pgwModal');
+            // Close on escape
+            if (pgwModal.config.closeOnEscape && pgwModal.config.closable) {
+                $(document).bind('keyup.PgwModal', function(e) {
+                    if (e.keyCode == 27) {
+                        close();
+                    }
+                });
+            }
+
+            // Close on background click
+            if (pgwModal.config.closeOnBackgroundClick && pgwModal.config.closable) {
+                $('#pgwModal').bind('click.PgwModalBackdrop', function(e) {
+                    var targetBackdrop = $(e.target).hasClass('pm-backdrop');
+                    if (targetBackdrop) {
+                        close();
+                    }
+                });
+            }
+
+            // Add CSS class on the body tag
+            $('body').addClass('pgwModalOpen');
+
+            var currentScrollbarWidth = getScrollbarWidth();
+            if (currentScrollbarWidth > 0) {
+                $('body').css('padding-right', currentScrollbarWidth);
+            }
+            
             $(document).trigger('PgwModal::Open');
             return true;
         };
