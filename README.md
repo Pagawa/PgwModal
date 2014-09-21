@@ -1,7 +1,7 @@
 PgwModal
 ========
 
-The full documentation and an example are available on [PgwJS.com](http://pgwjs.com/pgwmodal/).
+The full documentation and an example are available on [**PgwJS.com**/PgwModal](http://pgwjs.com/pgwmodal/).
 
 
 Requirements
