@@ -128,13 +128,13 @@
 
         // Returns the modal status
         var isOpen = function() {
-            return $('body').hasClass('pgwModalOpen');
+            return $('body, html').hasClass('pgwModalOpen');
         };
 
         // Close the modal
         var close = function() {
             $('#pgwModal, #pgwModalBackdrop').removeClass().hide();
-            $('body').css('padding-right', '').removeClass('pgwModalOpen');
+            $('body, html').css('padding-right', '').removeClass('pgwModalOpen');
 
             // Reset modal
             reset();
@@ -242,7 +242,7 @@
             }
 
             // Add CSS class on the body tag
-            $('body').addClass('pgwModalOpen');
+            $('body, html').addClass('pgwModalOpen');
 
             var currentScrollbarWidth = getScrollbarWidth();
             if (currentScrollbarWidth > 0) {
