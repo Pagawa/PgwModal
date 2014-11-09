@@ -69,7 +69,7 @@
             angular.element('body').injector().invoke(function($compile) {
                 var scope = angular.element($('#pgwModal .pm-content')).scope();
                 $compile($('#pgwModal .pm-content'))(scope);
-                scope.$digest();
+                if (!scope.$$phase) scope.$digest();
             });
             return true;
         };
