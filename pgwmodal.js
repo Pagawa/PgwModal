@@ -51,8 +51,13 @@
                 + '</div>'
                 + '</div>'
                 + '</div>';
-
-            $('body').append(appendBody);
+                
+            if (obj.target) {
+            	$(obj.target).after(appendBody);
+            } else {
+            	$('body').append(appendBody);
+            }
+            
             $(document).trigger('PgwModal::Create');
             return true;
         };
