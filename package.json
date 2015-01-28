@@ -1,0 +1,30 @@
+{
+  "name": "pgwmodal",
+  "title": "PgwModal",
+  "description": "Responsive Modal / Dialog window for jQuery, Zepto and AngularJS",
+  "version": "2.0.0",
+  "main": "pgwmodal.js",
+  "homepage": "https://pgwjs.com/pgwmodal",
+  "author": "Jonathan M. Piat",
+  "license" : "GNU GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pagawa/PgwModal.git"
+  },
+  "keywords": [
+    "modal",
+    "dialog",
+    "window",
+    "popup",
+    "alert",
+    "lightbox",
+    "responsive",
+    "mobile",
+    "jquery",
+    "jquery-plugin",
+    "zepto"
+  ],
+  "bugs": {
+    "url": "https://github.com/Pagawa/PgwModal/issues"
+  }
+}
