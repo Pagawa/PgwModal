@@ -2,7 +2,7 @@
   "name": "pgwmodal",
   "title": "PgwModal",
   "description": "Responsive Modal / Dialog window for jQuery, Zepto and AngularJS",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "pgwmodal.js",
   "homepage": "https://pgwjs.com/pgwmodal",
   "author": "Jonathan M. Piat",
