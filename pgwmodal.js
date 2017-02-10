@@ -66,11 +66,11 @@
 
         // Angular compilation
         var angularCompilation = function() {
-            angular.element('body').injector().invoke(function($compile) {
+            angular.element('body').injector().invoke(['$compile', function($compile) {
                 var scope = angular.element($('#pgwModal .pm-content')).scope();
                 $compile($('#pgwModal .pm-content'))(scope);
                 scope.$digest();
-            });
+            }]);
             return true;
         };
 
